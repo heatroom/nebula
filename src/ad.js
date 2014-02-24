@@ -1,18 +1,18 @@
 (function(doc) {
-	var baseurl = 'http://127.0.0.1:3003/foo', i;
+  var baseurl = 'http://127.0.0.1:3003/foo', i;
 
-	function querystring() {
-		var href = window.location.href, kv;
-		var params = href.slice(href.indexOf('?') + 1).split('&');
+  function querystring() {
+    var href = window.location.href, kv;
+    var params = href.slice(href.indexOf('?') + 1).split('&');
 
-		var qs = [];
-		for (i=0; i < params.length; i++) {
-			kv = params[i].split('=');
-			qs.push(kv[0]);
-			qs[kv[0]] = kv[1];
-		}
-		return qs;
-	}
+    var qs = [];
+    for (i=0; i < params.length; i++) {
+      kv = params[i].split('=');
+      qs.push(kv[0]);
+      qs[kv[0]] = kv[1];
+    }
+    return qs;
+  }
 
   function createSwf(swfDivId, swfUrl){
     var swfVersionStr = "9.0.0";
@@ -30,7 +30,7 @@
     swfobject.embedSWF(swfUrl, swfDivId, width,height,swfVersionStr,xiSwfUrlStr,flashvars,params,attributes);
   }
 
-	var jsonpfunc = 'nebula' + new Date().valueOf();
+  var jsonpfunc = 'nebula' + new Date().valueOf();
 
   function jsonp(url, callback) {
     window[jsonpfunc] = function(response) {
@@ -42,8 +42,8 @@
   }
 
   function adCard(){
-  	var url = baseurl;
-  	var img_tpl = '<div id="div_ad" class="sogou" style="text-align:left;vertical-align:middle">'
+    var url = baseurl;
+    var img_tpl = '<div id="div_ad" class="sogou" style="text-align:left;vertical-align:middle">'
         + '<img style="position:absolute;z-index:0" src="#imgSrc" border="0" width="250px;" height="250px;" margin-top="0px;">'
         + '<a href="#imgUrl" target="_blank" style="vertical-align:middle;cursor:pointer;z-index:1;position:absolute;left:0px;top:0px;display:block;background:white;filter:alpha(opacity=0);opacity:0;width:250px;height:250px;"></a>'
         + '<a id="logo" class="logo" style="z-index:2" href="#promote" target="_blank"></a></div>';
@@ -52,7 +52,7 @@
         + '<a target="_blank" class="pz-rt-stat" href="#swfUrl"></a>';
     var card = doc.createElement('div');
 
-  	jsonp(url, function(response) {
+    jsonp(url, function(response) {
       
       var data = response.data;
       
@@ -75,13 +75,7 @@
         doc.body.appendChild(card);
         createSwf("swf-container", swfSrc);
       }
-  	});
-
-
-
-    
+    });
   }
-
   adCard();
-
 })(document);

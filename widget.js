@@ -1,25 +1,6 @@
-(function(d) {
+(function(doc) {
 
-  var i, count = 0;
-
-  function queryclass(name) {
-    if (d.querySelectorAll) {
-      return d.querySelectorAll('.' + name);
-    }
-    var elements = d.getElementsByTagName('div');
-    var ret = [];
-    for (i = 0; i < elements.length; i++) {
-      if (~elements[i].className.split(' ').indexOf(name)) {
-        ret.push(elements[i]);
-      }
-    }
-    return ret;
-  }
-
-  function querydata(element, name) {
-    return element.getAttribute('data-' + name);
-  }
-
+  
   function heighty(iframe) {
     if (window.addEventListener) {
       window.addEventListener('message', function(e) {
@@ -29,20 +10,35 @@
       }, false);
     }
   }
+  
+  function queryclass(name) {
+    if (doc.querySelectorAll) {
+      return doc.querySelectorAll('.' + name);
+    }
+    var elements = doc.getElementsByTagName('div');
+    var ret = [];
+    for (i = 0; i < elements.length; i++) {
+      if (~elements[i].className.split(' ').indexOf(name)) {
+        ret.push(elements[i]);
+      }
+    }
+    return ret;
+  }
+
 
   function render(card, baseurl) {
-    var iframe = d.createElement('iframe');
-    iframe.setAttribute('id', identity);
+    var iframe = doc.createElement('iframe');
+    
     iframe.setAttribute('frameborder', 0);
     iframe.setAttribute('scrolling', 0);
     iframe.setAttribute('allowtransparency', true);
 
-    var url = baseurl + '?user=' + user + '&identity=' + identity;
+    var url = baseurl;
 
     iframe.src = url;
-    iframe.width = width || Math.min(d.body.clientWidth || 400, 400);
-    if (height) {
-      iframe.height = height;
+    iframe.width = xy_ad_width || Math.min(doc.body.clientWidth || 400, 400);
+    if (xy_ad_height) {
+      iframe.height = xy_ad_height;
     }
 
     card.parentNode.replaceChild(iframe, card);
@@ -50,6 +46,8 @@
   }
 
 
-  render(card, baseurl);
+  var card = doc.getElementById('nebula-card');
+
+  render(card, "ad.html");
   
 })(document);
