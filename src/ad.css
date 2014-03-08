@@ -17,3 +17,18 @@ a.logo {
 	background: url(http://p.inte.sogou.com/testgpimg/sogou_icon_short.png) no-repeat left top;
 	_background: none;
 }
+
+.pz-rt-stat {
+	background: #FFF;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.pz-rt-stat {
+	position: absolute;
+	display: block;
+	width: 175px;
+	height: 300px;
+	left: 0;
+	top: 0;
+	z-index: 100;
+}

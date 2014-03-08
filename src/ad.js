@@ -46,7 +46,7 @@
     var img_tpl = '<div id="div_ad" class="sogou" style="text-align:left;vertical-align:middle">'
         + '<img style="position:absolute;z-index:0" src="#imgSrc" border="0" width="250px;" height="250px;" margin-top="0px;">'
         + '<a href="#imgUrl" target="_blank" style="vertical-align:middle;cursor:pointer;z-index:1;position:absolute;left:0px;top:0px;display:block;background:white;filter:alpha(opacity=0);opacity:0;width:250px;height:250px;"></a>'
-        + '<a id="logo" class="logo" style="z-index:2" href="#promote" target="_blank"></a></div>';
+        + '</div>';
 
     var swf_tpl = '<span id="swf-container"></span>'
         + '<a target="_blank" class="pz-rt-stat" href="#swfUrl"></a>';
@@ -57,18 +57,16 @@
       var data = response.data;
       
       if (response.type === 1) {
-        var imgUrl = data['imgUrl'];
-        var imgSrc = data['imgSrc'];
-        var promote = data['promote'];
+        var imgUrl = data['url'];
+        var imgSrc = data['src'];
         
         img_tpl = img_tpl.replace('#imgUrl', imgUrl);
         img_tpl = img_tpl.replace('#imgSrc', imgSrc);
-        img_tpl = img_tpl.replace('#promote', promote);
         card.innerHTML = img_tpl;
         doc.body.appendChild(card);
       } else if (response.type === 2) {
-        var swfSrc = data['swfSrc'];
-        var swfUrl = data['swfUrl'];
+        var swfSrc = data['src'];
+        var swfUrl = data['url'];
         swf_tpl = swf_tpl.replace('#swfUrl', swfUrl);
         console.log(swf_tpl);
         card.innerHTML = swf_tpl;
